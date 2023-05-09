@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokedex</title>
+</head>
+
+<body>
+  <section class="content" id="advancedDetails">
+    <div id="detailsBackground" class="detailsBackground {{pokemon.types[0].type.name}}">
+      <div class="nav">
+        <div class="previous" (click)="previousPokemon()">
+          <img src="assets/images/arrow_back_white_24dp.svg" alt="previous" />
+        </div>
+        <div class="next" (click)="nextPokemon()">
+          <img src="assets/images/arrow_forward_white_24dp.svg" alt="forward" />
+        </div>
+      </div>
+      <div class="pokemonInfo">
+        <div>
+          <h1>{{pokemon.name}}</h1>
+          <ol class="types">
+            <li class="type {{type.type.name}}" *ngFor="let type of pokemon.types">{{type.type.name}}</li>
+          </ol>
+        </div>
+        <div>
+          <h4>#{{formatPokemonId(pokemonId)}}</h4>
+        </div>
+      </div>
+      <div class="image">
+        <img src="assets/images/pokeball.png" alt="pokeball" class="pokeball" />
+        <img src="{{getPokemonPhoto()}}"
+          alt="{{pokemon.name}}" />
+      </div>
+    </div>
+    <div class="detailsInfo">
+      <div class="abilitiesSize">
+        <div class="abilities">
+          <h3>Abilities</h3>
+          <p>{{getPokemonAbilities()}}</p>
+        </div>
+        <div class="size">
+          <h3>Height</h3>
+          <p>{{convertHeightToMeters()}}</p>
+          <h3>Weight</h3>
+          <p>{{convertWeightToKg()}}</p>
+        </div>
+      </div>
+      <div class="stats">
+        <h1>Stats</h1>
+        <div class="statsBar" *ngFor="let stat of pokemon.stats">
+          <div class="title">
+            <h4>{{stat.stat.name | uppercase }}:</h4>
+          </div>
+          <div class="stat">
+            <h5>{{stat.base_stat}}</h5>
+            <progress class="progress-{{pokemon.types[0].type.name}} progress" value="{{stat.base_stat}}" max="150"></progress>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
